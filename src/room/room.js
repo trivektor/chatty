@@ -30,6 +30,9 @@ const ChatboxContainer = styled.form`
     border-radius: 0 4px 4px 0;
 
     .bp3-input {
+      background: inherit;
+      box-shadow: none;
+
       &:focus {
         background: inherit;
         box-shadow: none;
