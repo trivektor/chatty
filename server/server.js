@@ -11,7 +11,13 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', (socket) => {
-  console.log('New connection established');
+  // https://stackoverflow.com/questions/13143945/dynamic-namespaces-socket-io
+  const roomId = socket.handshake['query']['id'];
+
+  socket.join(roomId);
+  socket.on('message', ({message}) => {
+    io.to(roomId).emit('message', message);
+  });
 });
 
 server.listen(8080);

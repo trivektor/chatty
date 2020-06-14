@@ -1,14 +1,22 @@
-import React, {useEffect} from 'react';
-import io from 'socket.io-client';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+
+import Home from './home';
+import Room from './room';
 
 function App() {
-  useEffect(() => {
-    io('http://localhost:8080');
-  }, []);
-
   return (
     <div style={{padding: 20}}>
-      <button>Create room</button>
+      <Router>
+        <Switch>
+          <Route exact path="/" children={<Home />} />
+          <Route path="/room/:id" children={<Room />} />
+        </Switch>
+      </Router>
     </div>
   );
 }
