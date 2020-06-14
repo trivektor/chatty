@@ -4,17 +4,7 @@ import styled from 'styled-components';
 import {InputGroup} from '@blueprintjs/core';
 
 import Messages from './messages';
-
-const Header = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  color: #fff;
-  background: green;
-  box-sizing: border-box;
-`;
+import NameDialog from './name-dialog';
 
 const ChatboxContainer = styled.form`
   display: block;
@@ -22,7 +12,7 @@ const ChatboxContainer = styled.form`
   bottom: 0;
   left: 0;
   right: 0;
-  background: #eee;
+  background: #fff;
   border-top: 1px solid #ccc;
   padding: 10px;
 `;
@@ -33,6 +23,7 @@ class Room extends Component {
     this.state = {
       message: "",
       messages: [],
+      name: "",
     };
   }
 
@@ -69,7 +60,14 @@ class Room extends Component {
   }
 
   render() {
-    const {messages, message} = this.state;
+    const {messages, message, name} = this.state;
+
+    if (!name) {
+      return (
+        <NameDialog
+          onNameConfirm={(confirmedName) => this.setState({name: confirmedName})} />
+      );
+    }
 
     return (
       <Fragment>

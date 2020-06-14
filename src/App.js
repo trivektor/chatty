@@ -12,7 +12,7 @@ import Room from './room';
 function App() {
   return (
     <Fragment>
-      <Navbar className="bp3-dark">
+      <Navbar>
         <Navbar.Group>
           <Navbar.Heading>Chatty</Navbar.Heading>
         </Navbar.Group>
