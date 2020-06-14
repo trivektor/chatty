@@ -14,6 +14,8 @@ const NameDialog = ({onNameConfirm}) => {
 
     if (!name) return;
 
+    sessionStorage.setItem('name', name);
+
     onNameConfirm(name);
 
     setIsOpen(false);
