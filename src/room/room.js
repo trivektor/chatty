@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
+import {InputGroup} from '@blueprintjs/core';
 
 import Messages from './messages';
 
@@ -13,7 +14,6 @@ const Header = styled.header`
   color: #fff;
   background: green;
   box-sizing: border-box;
-  height: 40px;
 `;
 
 const ChatboxContainer = styled.form`
@@ -24,21 +24,7 @@ const ChatboxContainer = styled.form`
   right: 0;
   background: #eee;
   border-top: 1px solid #ccc;
-  padding: 12px;
-
-  input {
-    border: 0;
-    width: 100%;
-    border-radius: 8px;
-    background: #fff;
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-
-    &:focus {
-      outline: none;
-    }
-  }
+  padding: 10px;
 `;
 
 class Room extends Component {
@@ -87,10 +73,9 @@ class Room extends Component {
 
     return (
       <Fragment>
-        <Header>Chat</Header>
         <Messages messages={messages} />
         <ChatboxContainer onSubmit={this.onSubmit}>
-          <input
+          <InputGroup
             autoFocus
             placeholder="Enter a message..."
             value={message}

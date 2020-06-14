@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const MessagesContainer = styled.section`
   position: absolute;
-  top: 40px;
+  top: 49px;
   left: 0;
   right: 0;
-  bottom: 40px;
+  bottom: 51px;
   overflow: auto;
   background: #fafafa;
 `;
