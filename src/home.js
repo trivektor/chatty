@@ -10,7 +10,9 @@ const Home = () => {
   };
 
   return (
-    <Button onClick={onCreateRoom}>Create room</Button>
+    <div style={{padding: 20}}>
+      <Button onClick={onCreateRoom}>Create room</Button>
+    </div>
   );
 };
 

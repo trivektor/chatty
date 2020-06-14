@@ -15,8 +15,8 @@ io.on('connection', (socket) => {
   const roomId = socket.handshake['query']['id'];
 
   socket.join(roomId);
-  socket.on('message', ({message}) => {
-    io.to(roomId).emit('message', message);
+  socket.on('message', ({message, name}) => {
+    io.to(roomId).emit('message', {message, name});
   });
 });
 

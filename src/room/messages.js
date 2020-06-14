@@ -9,18 +9,54 @@ const MessagesContainer = styled.section`
   bottom: 51px;
   overflow: auto;
   background: #fafafa;
+  padding: 10px 15px;
 `;
 
-const Messages = ({messages}) => {
+const MessageItem = styled.div`
+  padding: 5px 0;
+
+  .content {
+    background: #e0e0e0;
+    border-radius: 15px;
+  }
+
+  &.alternate {
+    text-align: right;
+
+    .content {
+      background: #147efb;
+      color: #fff;
+    }
+  }
+`;
+
+const MessageContent = styled.span`
+  display: inline-block;
+  padding: 4px 10px;
+`;
+
+const Messages = ({messages, name}) => {
   const ref = useRef();
 
   useEffect(() => {
     ref.current.scrollTop = ref.current.scrollHeight;
   }, [messages]);
 
+  console.log({messages});
+
   return (
     <MessagesContainer ref={ref}>
-      {messages.map((msg, index) => <div key={index} style={{padding: 4}}>{msg}</div>)}
+      {
+        messages.map((messageObj, index) => (
+          <MessageItem
+            key={index}
+            className={messageObj.name !== name && 'alternate'}>
+            <MessageContent className="content">
+              {messageObj.message}
+            </MessageContent>
+          </MessageItem>
+        ))
+      }
     </MessagesContainer>
   );
 };

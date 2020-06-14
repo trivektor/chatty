@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
-import {InputGroup} from '@blueprintjs/core';
+import {InputGroup, ButtonGroup, Button} from '@blueprintjs/core';
 
 import Messages from './messages';
 import NameDialog from './name-dialog';
@@ -15,6 +15,26 @@ const ChatboxContainer = styled.form`
   background: #fff;
   border-top: 1px solid #ccc;
   padding: 10px;
+
+  .bp3-button-group {
+    width: 100%;
+  }
+
+  .bp3-input-group {
+    flex: 1;
+    background: #fafafa;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-radius: 0 4px 4px 0;
+
+    .bp3-input {
+      &:focus {
+        background: inherit;
+        box-shadow: none;
+      }
+    }
+  }
 `;
 
 class Room extends Component {
@@ -37,13 +57,13 @@ class Room extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onMessageReceived(message) {
+  onMessageReceived({message, name}) {
     const {messages} = this.state;
 
     this.setState({
       messages: [
         ...messages,
-        message,
+        {message, name},
       ],
     });
   }
@@ -51,11 +71,11 @@ class Room extends Component {
   onSubmit(event) {
     event.preventDefault();
 
-    const {message} = this.state;
+    const {message, name} = this.state;
 
     if (!message) return;
 
-    this.socket.emit('message', {message});
+    this.socket.emit('message', {message, name});
     this.setState({message: ''});
   }
 
@@ -71,15 +91,18 @@ class Room extends Component {
 
     return (
       <Fragment>
-        <Messages messages={messages} />
+        <Messages name={name} messages={messages} />
         <ChatboxContainer onSubmit={this.onSubmit}>
-          <InputGroup
-            autoFocus
-            placeholder="Enter a message..."
-            value={message}
-            onChange={(event) => {
-              this.setState({message: event.target.value})
-            }} />
+          <ButtonGroup>
+            <Button>{name}</Button>
+            <InputGroup
+              autoFocus
+              placeholder="Enter a message..."
+              value={message}
+              onChange={(event) => {
+                this.setState({message: event.target.value})
+              }} />
+          </ButtonGroup>
         </ChatboxContainer>
       </Fragment>
     );

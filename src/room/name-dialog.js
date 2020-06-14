@@ -4,10 +4,7 @@ import {
   Classes,
   InputGroup,
   FormGroup,
-  Intent,
 } from '@blueprintjs/core';
-
-import AppToaster from './app-toaster';
 
 const NameDialog = ({onNameConfirm}) => {
   const [name, setName] = useState('');
@@ -20,11 +17,6 @@ const NameDialog = ({onNameConfirm}) => {
     onNameConfirm(name);
 
     setIsOpen(false);
-
-    AppToaster.show({
-      message: `Hello ${name}!`,
-      intent: Intent.SUCCESS,
-    });
   }, [onNameConfirm, setIsOpen, name]);
 
   return (
