@@ -10,14 +10,16 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
-io.on('connection', (socket) => {
-  // https://stackoverflow.com/questions/13143945/dynamic-namespaces-socket-io
-  const roomId = socket.handshake['query']['id'];
+io
+  .of('/chatty')
+  .on('connection', (socket) => {
+    // https://stackoverflow.com/questions/13143945/dynamic-namespaces-socket-io
+    const roomId = socket.handshake['query']['id'];
 
-  socket.join(roomId);
-  socket.on('message', ({message, name}) => {
-    io.to(roomId).emit('message', {message, name});
+    socket.join(roomId);
+    socket.on('message', ({message, name}) => {
+      io.of('/chatty').to(roomId).emit('message', {message, name});
+    });
   });
-});
 
 server.listen(8080);

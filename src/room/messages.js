@@ -42,8 +42,6 @@ const Messages = ({messages, name}) => {
     ref.current.scrollTop = ref.current.scrollHeight;
   }, [messages]);
 
-  console.log({messages});
-
   return (
     <MessagesContainer ref={ref}>
       {

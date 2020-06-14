@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
 import {InputGroup, ButtonGroup, Button} from '@blueprintjs/core';
+import {withRouter} from 'react-router';
 
 import Messages from './messages';
 import NameDialog from './name-dialog';
@@ -48,8 +49,10 @@ class Room extends Component {
   }
 
   componentDidMount() {
-    this.socket = io('http://localhost:8080', {
-      query: `id=${this.props.id}`,
+    const {match} = this.props;
+
+    this.socket = io('/chatty', {
+      query: `id=${match.params.id}`,
     });
 
     this.socket.on('message', this.onMessageReceived.bind(this));
@@ -109,4 +112,4 @@ class Room extends Component {
   }
 };
 
-export {Room as default};
+export default withRouter(Room);
