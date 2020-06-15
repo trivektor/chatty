@@ -4,6 +4,9 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const path = require('path');
 
+// https://help.heroku.com/P1AVPANS/why-is-my-node-js-app-crashing-with-an-r10-error
+const PORT = process.env.PORT || 8080;
+
 app.use(express.static(path.join(__dirname, '../build')));
 
 app.get('/', function (req, res) {
@@ -22,4 +25,4 @@ io
     });
   });
 
-server.listen(8080);
+server.listen(PORT);
