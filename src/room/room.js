@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import io from 'socket.io-client';
 import styled from 'styled-components';
-import {InputGroup, ButtonGroup, Button} from '@blueprintjs/core';
+import {InputGroup, ButtonGroup, Button, Navbar, Alignment} from '@blueprintjs/core';
 import {withRouter} from 'react-router';
 
 import Messages from './messages';
@@ -97,6 +97,13 @@ class Room extends Component {
 
     return (
       <Fragment>
+        <Navbar>
+          <Navbar.Group>
+            <Navbar.Heading>Chatty</Navbar.Heading>
+          </Navbar.Group>
+          <Navbar.Group align={Alignment.RIGHT}>
+          </Navbar.Group>
+        </Navbar>
         <Messages name={name} messages={messages} />
         <ChatboxContainer onSubmit={this.onSubmit}>
           <ButtonGroup>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {useHistory} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
-import {Button} from '@blueprintjs/core';
+import {Navbar, Button} from '@blueprintjs/core';
 
 const Home = () => {
   const history = useHistory();
@@ -10,9 +10,16 @@ const Home = () => {
   };
 
   return (
-    <div style={{padding: 20}}>
-      <Button onClick={onCreateRoom}>Create room</Button>
-    </div>
+    <Fragment>
+      <Navbar>
+        <Navbar.Group>
+          <Navbar.Heading>Chatty</Navbar.Heading>
+        </Navbar.Group>
+      </Navbar>
+      <div style={{padding: 20}}>
+        <Button onClick={onCreateRoom}>Create room</Button>
+      </div>
+    </Fragment>
   );
 };
 

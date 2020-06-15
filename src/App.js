@@ -4,7 +4,6 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import {Navbar} from '@blueprintjs/core';
 
 import Home from './home';
 import Room from './room';
@@ -12,11 +11,6 @@ import Room from './room';
 function App() {
   return (
     <Fragment>
-      <Navbar>
-        <Navbar.Group>
-          <Navbar.Heading>Chatty</Navbar.Heading>
-        </Navbar.Group>
-      </Navbar>
       <Router>
         <Switch>
           <Route exact path="/" children={<Home />} />
