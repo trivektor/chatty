@@ -61,6 +61,10 @@ class Room extends Component {
     this.socket.on('message', this.onMessageReceived.bind(this));
 
     this.onSubmit = this.onSubmit.bind(this);
+
+    fetch(`/room/${match.params.id}`).then((response) => response.json()).then((json) => {
+      this.setState({messages: json.messages});
+    });
   }
 
   onMessageReceived({message, name}) {
@@ -81,7 +85,9 @@ class Room extends Component {
 
     if (!message) return;
 
-    this.socket.emit('message', {message, name});
+    const {match} = this.props;
+
+    this.socket.emit('message', {message, name, roomId: match.params.id});
     this.setState({message: ''});
   }
 
