@@ -5,7 +5,7 @@ import {Navbar, Button} from '@blueprintjs/core';
 const Home = () => {
   const history = useHistory();
   const onCreateRoom = async () => {
-    const response = await fetch('/rooms', {
+    const response = await fetch('/api/rooms', {
       method: 'POST',
     });
     const json = await response.json();

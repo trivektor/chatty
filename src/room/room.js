@@ -62,7 +62,7 @@ class Room extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
 
-    fetch(`/room/${match.params.id}`).then((response) => response.json()).then((json) => {
+    fetch(`/api/room/${match.params.id}`).then((response) => response.json()).then((json) => {
       this.setState({messages: json.messages});
     });
   }

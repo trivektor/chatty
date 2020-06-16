@@ -10,14 +10,15 @@ const PORT = process.env.PORT || 8080;
 const dbConnection = require('./dbconnection');
 const {Message, Room} = require('./models');
 
-app.get('/room/:id', async (req, res) => {
-  console.log('goes here');
+const apiRouter = express.Router();
+
+apiRouter.get('/room/:id', async (req, res) => {
   const room = await Room.findById(req.params.id);
 
   res.json(room);
 });
 
-app.post('/rooms', async (req, res) => {
+apiRouter.post('/rooms', async (req, res) => {
   const room = new Room();
 
   room.save();
@@ -25,6 +26,7 @@ app.post('/rooms', async (req, res) => {
   res.json(room);
 });
 
+app.use('/api', apiRouter);
 app.use(express.static(path.join(__dirname, '../build')));
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
