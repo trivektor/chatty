@@ -24,6 +24,7 @@ const Video = () => {
   useEffect(() => {
     const peer1 = new Peer({initiator: true});
     const peer2 = new Peer();
+    let mediaStream;
 
     peer1.on('signal', (data) => {
       peer2.signal(data)
@@ -44,6 +45,7 @@ const Video = () => {
       .getUserMedia({video: true, audio: true})
       .then((stream) => {
         peer1.addStream(stream);
+        mediaStream = stream;
       }).catch((err) => {
         console.log({err});
       });
@@ -51,8 +53,7 @@ const Video = () => {
     const current = ref.current;
 
     return () => {
-      peer1.destroy();
-      current.srcObject.getTracks().forEach((track) => {
+      mediaStream.getTracks().forEach((track) => {
         track.stop();
       });
       current.pause();
