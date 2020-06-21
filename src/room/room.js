@@ -6,6 +6,7 @@ import {withRouter} from 'react-router';
 
 import Messages from './messages';
 import NameDialog from './name-dialog';
+import ChatVideo from './chat-video';
 
 const ChatboxContainer = styled.form`
   display: block;
@@ -123,6 +124,7 @@ class Room extends Component {
               }} />
           </ButtonGroup>
         </ChatboxContainer>
+        <ChatVideo />
       </Fragment>
     );
   }
